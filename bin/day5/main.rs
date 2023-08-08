@@ -46,8 +46,18 @@ fn process_instructions_part2(stacks: &mut Vec<Vec<char>>, instr: &Instruction) 
     stack_to.append(&mut stack_split);
 }
 
+fn print_stack(stacks: &Vec<Vec<char>>) {
+    let mut out: String = String::new();
+    for s in stacks {
+        if let Some(c) = s.last() {
+            out.push(*c);
+        }
+    }
+    println!("{}", out);
+}
+
 fn main() -> io::Result<()> {
-    let mut stacks: Vec<Vec<char>> = vec![
+    let start_stacks: Vec<Vec<char>> = vec![
         vec!['J', 'H', 'P', 'M', 'S', 'F', 'N', 'V'],
         vec!['S', 'R', 'L', 'M', 'J', 'D', 'Q'],
         vec!['N', 'Q', 'D', 'H', 'C', 'S', 'W', 'B'],
@@ -59,6 +69,9 @@ fn main() -> io::Result<()> {
         vec!['D', 'S', 'J', 'V', 'G', 'P', 'B', 'F'],
     ];
 
+    let mut stacks_part1 = start_stacks.clone();
+    let mut stacks_part2 = start_stacks.clone();
+
     let path = Path::new("./bin/day5/input");
     let file = File::open(&path)?;
     let lines = BufReader::new(&file).lines().skip(10);
@@ -66,16 +79,14 @@ fn main() -> io::Result<()> {
     for l in lines {
         let line = l.unwrap();
         let instr = line.parse::<Instruction>().unwrap();
-        process_instructions_part1(&mut stacks, &instr);
+        process_instructions_part1(&mut stacks_part1, &instr);
+        process_instructions_part2(&mut stacks_part2, &instr);
     }
 
-    let mut out: String = String::new();
-    for s in stacks {
-        if let Some(c) = s.last() {
-            out.push(*c);
-        }
-    }
-    println!("{}", out);
+    println!("Part 1");
+    print_stack(&stacks_part1);
+    println!("Part 2");
+    print_stack(&stacks_part2);
 
     Ok(())
 }
