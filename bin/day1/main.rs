@@ -1,6 +1,6 @@
 use std::fs::File;
-use std::path::Path;
 use std::io::{BufRead, BufReader};
+use std::path::Path;
 
 fn main() {
     let path = Path::new("./bin/day1/input");
@@ -18,7 +18,7 @@ fn main() {
                 let sum: i32 = elve.iter().sum();
                 elve.clear();
                 calories.push(sum);
-            },
+            }
             false => elve.push(l.parse::<i32>().unwrap()),
         }
     }
@@ -65,4 +65,3 @@ fn main() {
 //
 //     Ok(())
 // }
-

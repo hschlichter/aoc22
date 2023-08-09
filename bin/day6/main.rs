@@ -1,4 +1,9 @@
-use std::{path::Path, fs::File, io::{self, BufReader, BufRead}, collections::HashSet};
+use std::{
+    collections::HashSet,
+    fs::File,
+    io::{self, BufRead, BufReader},
+    path::Path,
+};
 
 fn is_chars_unique(buf: Vec<char>) -> bool {
     let mut freq: HashSet<char> = HashSet::new();
@@ -46,7 +51,7 @@ mod tests {
         let buf = vec!['b', 'a', 'd', 'e'];
         assert!(is_chars_unique(buf));
     }
- 
+
     #[test]
     fn test_chars_is_not_unique_start_inside() {
         let buf = vec!['b', 'a', 'b', 'e'];
@@ -73,21 +78,33 @@ mod tests {
 
     #[test]
     fn test_detect_sequence_finds_marker_0() {
-        assert_eq!(detect_sequence_marker(&String::from("bvwbjplbgvbhsrlpgdmjqwftvncz"), 4), 5);
+        assert_eq!(
+            detect_sequence_marker(&String::from("bvwbjplbgvbhsrlpgdmjqwftvncz"), 4),
+            5
+        );
     }
 
     #[test]
     fn test_detect_sequence_finds_marker_1() {
-        assert_eq!(detect_sequence_marker(&String::from("nppdvjthqldpwncqszvftbrmjlhg"), 4), 6);
+        assert_eq!(
+            detect_sequence_marker(&String::from("nppdvjthqldpwncqszvftbrmjlhg"), 4),
+            6
+        );
     }
 
     #[test]
     fn test_detect_sequence_finds_marker_2() {
-        assert_eq!(detect_sequence_marker(&String::from("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 4), 10);
+        assert_eq!(
+            detect_sequence_marker(&String::from("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 4),
+            10
+        );
     }
 
     #[test]
     fn test_detect_sequence_finds_marker_3() {
-        assert_eq!(detect_sequence_marker(&String::from("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 4), 11);
+        assert_eq!(
+            detect_sequence_marker(&String::from("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 4),
+            11
+        );
     }
 }

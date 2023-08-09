@@ -1,4 +1,10 @@
-use std::{str::FromStr, io::{self, BufReader, BufRead}, path::Path, fs::File, vec};
+use std::{
+    fs::File,
+    io::{self, BufRead, BufReader},
+    path::Path,
+    str::FromStr,
+    vec,
+};
 
 #[derive(Debug)]
 struct Instruction {
@@ -13,7 +19,7 @@ impl FromStr for Instruction {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let tokens: Vec<&str> = s.split_whitespace().collect();
         if tokens.len() > 6 {
-            return Err(format!("To many tokens {}", "hello"))
+            return Err(format!("To many tokens {}", "hello"));
         }
 
         assert_eq!(tokens[0], "move");
@@ -105,11 +111,7 @@ mod tests {
 
     #[test]
     fn test_instruction_processing_part1() {
-        let mut stacks: Vec<Vec<char>> = vec![
-            vec!['Z', 'N'],
-            vec!['M', 'C', 'D'],
-            vec!['P'],
-        ];
+        let mut stacks: Vec<Vec<char>> = vec![vec!['Z', 'N'], vec!['M', 'C', 'D'], vec!['P']];
 
         let instr = vec![
             "move 1 from 2 to 1".parse::<Instruction>().unwrap(),
@@ -133,11 +135,7 @@ mod tests {
 
     #[test]
     fn test_instruction_processing_part2() {
-        let mut stacks: Vec<Vec<char>> = vec![
-            vec!['Z', 'N'],
-            vec!['M', 'C', 'D'],
-            vec!['P'],
-        ];
+        let mut stacks: Vec<Vec<char>> = vec![vec!['Z', 'N'], vec!['M', 'C', 'D'], vec!['P']];
 
         let instr = vec![
             "move 1 from 2 to 1".parse::<Instruction>().unwrap(),

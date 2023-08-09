@@ -60,11 +60,8 @@ impl Game {
     pub fn new(l: &str, r: &str) -> Result<Self, GameError> {
         let left = l.parse()?;
         let right = r.parse()?;
-        
-        Ok(Self {
-            left,
-            right,
-        })
+
+        Ok(Self { left, right })
     }
 
     pub fn new_v2(l: &str, r: &str) -> Result<Self, GameError> {
@@ -83,17 +80,18 @@ impl Game {
             (Shape::Scissor, Outcome::Loss) => Shape::Paper,
         };
 
-        Ok(Self {
-            left,
-            right,
-        })
+        Ok(Self { left, right })
     }
 
     // Evaluates the game according to the right player
     pub fn eval_game_right(&self) -> i32 {
         match (&self.right, &self.left) {
-            (Shape::Rock, Shape::Scissor) | (Shape::Scissor, Shape::Paper) | (Shape::Paper, Shape::Rock) => 6,
-            (Shape::Rock, Shape::Rock) | (Shape::Paper, Shape::Paper) | (Shape::Scissor, Shape::Scissor) => 3,
+            (Shape::Rock, Shape::Scissor)
+            | (Shape::Scissor, Shape::Paper)
+            | (Shape::Paper, Shape::Rock) => 6,
+            (Shape::Rock, Shape::Rock)
+            | (Shape::Paper, Shape::Paper)
+            | (Shape::Scissor, Shape::Scissor) => 3,
             _ => 0,
         }
     }
@@ -110,7 +108,7 @@ impl Game {
 
 fn main() {
     let path = Path::new("./bin/day2/input");
-   
+
     let games: Vec<Game> = BufReader::new(File::open(&path).unwrap())
         .lines()
         .map(|line| {
@@ -120,7 +118,10 @@ fn main() {
         })
         .collect();
 
-    let total_points: i32 = games.iter().map(|g| g.eval_game_right() + g.eval_shape_right()).sum();
+    let total_points: i32 = games
+        .iter()
+        .map(|g| g.eval_game_right() + g.eval_shape_right())
+        .sum();
     println!("Part 1 - points: {}", total_points);
 
     let games_v2: Vec<Game> = BufReader::new(File::open(&path).unwrap())
@@ -132,7 +133,10 @@ fn main() {
         })
         .collect();
 
-    let total_points_v2: i32 = games_v2.iter().map(|g| g.eval_game_right() + g.eval_shape_right()).sum();
+    let total_points_v2: i32 = games_v2
+        .iter()
+        .map(|g| g.eval_game_right() + g.eval_shape_right())
+        .sum();
     println!("Part 2 - points: {}", total_points_v2);
 }
 
